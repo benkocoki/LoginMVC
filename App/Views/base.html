@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/php-mvc/public/css/style.css">
+
+</head>
+<body>
+  <div class="container">
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div  class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item"><a class="nav-link" href="/php-mvc/public/">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/php-mvc/public/about/show">About Us</a></li>
+        </ul>
+          {% if current_user %}
+          <ul class="navbar-nav navbar-right">
+              <li class="nav-item"><a class="nav-link" href="/php-mvc/public/posts/show">Posts</a></li>
+              <li  class="nav-item"><a class="nav-link" href="/php-mvc/public/profile/show">{{ current_user.name }}</a></li>
+              <li  class="nav-item"><a class="nav-link" href="/php-mvc/public/logout">Log Out</a></li>
+          </ul>
+          {% else %}
+          <ul class="navbar-nav navbar-right">
+              <li  class="nav-item"><a class="nav-link" href="/php-mvc/public/signup/new">Sign up</a></li>
+              <li  class="nav-item"><a class="nav-link" href="/php-mvc/public/login/new">Log in</a></li>
+          </ul>
+          {% endif %}
+      </div>
+    </nav>
+    {% for message in flash_messages %}
+      <br><div class="alert alert-{{ message.type }}">
+          {{ message.body }}
+      </div>
+      {% endfor %}
+
+    {% block body %}
+    {% endblock %}
+
+  </div>
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
+
+  {% block footer %}
+  {% endblock %}
+</body>
+</html>
